@@ -9,7 +9,10 @@ export class FirstprojStack extends cdk.Stack {
     super(scope, id, props);
 
     // 1. create an s3 bucket
-    const websiteb = new cdk.aws_s3.Bucket(this, "website");
+    const websiteb = new cdk.aws_s3.Bucket(this, "website", {
+      autoDeleteObjects: true,
+      removalPolicy: cdk.RemovalPolicy.DESTROY
+    });
 
     const websiteS3BucketName = new cdk.CfnOutput(this, 'bucketname', {
       value: websiteb.bucketName,
